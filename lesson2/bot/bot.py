@@ -63,10 +63,11 @@ def next_full_moon(bot, update):
     text_list = update.message.text.split()    
     text = text_list[-1]  
     try:
-        update.message.reply_text(str(ephem.next_full_moon(text)))
+        date = datetime.datetime.strptime(text, '%Y-%m-%d')
+        update.message.reply_text(str(ephem.next_full_moon(date)))
     except ValueError as e:
-        update.message.reply_text(str(e))
-        update.message.reply_text("Try something like /next_full_moon 2019-01-01")
+#         update.message.reply_text(str(e))
+        update.message.reply_text("Cannot understand date. Try something like /next_full_moon 2019-01-01")
 
 def init_city_game(bot, update):
     with open('cities') as f:
