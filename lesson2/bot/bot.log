@@ -1,0 +1,74 @@
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 33, in planet
+    text_list = update.message.text.split()
+AttributeError: 'NoneType' object has no attribute 'text'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 80, in remind_city_game
+    if username in city_game_config.keys():
+NameError: name 'city_game_config' is not defined
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 88, in m
+    if username not in city_game_config.keys():
+NameError: name 'city_game_config' is not defined
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 74, in init_city_game
+    city_game_config[username] = {'cities_whitelist':city_list, 'last_letter': 'any', 'cities_blacklist':[]}
+NameError: name 'city_game_config' is not defined
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 74, in init_city_game
+    city_game_config[username] = {'cities_whitelist':city_list, 'last_letter': 'any', 'cities_blacklist':[]}
+NameError: name 'city_game_config' is not defined
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 81, in remind_city_game
+    if username in city_game_config.keys():
+NameError: name 'city_game_config' is not defined
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/home/alexey/.local/lib/python3.7/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "bot.py", line 100, in m
+    if user_city in whitelist and (user_city[0] == last_letter or last_letter == 'any'):
+IndexError: string index out of range
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - WARNING - Exiting immediately!
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - WARNING - Exiting immediately!
