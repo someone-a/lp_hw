@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-
+import re
 import ephem
 import datetime
 dttm = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -128,8 +128,62 @@ def m(bot, update):
     else:
         update.message.reply_text(f'There is no city "{user_city}"')    
                               
-                              
-                              
+def calc(bot, update):
+    text = update.message.text.replace('/calc','').strip()
+    filtered_list = []
+    ok_symbols = ['+','-','*','/']
+    parsed_sting = re.findall('\d+|[+,-,*,/]', text)
+    want_to_find_digit = True
+    for symbol in parsed_sting:
+        if want_to_find_digit and symbol.isdigit():
+            filtered_list.append(symbol)
+            want_to_find_digit = not want_to_find_digit
+
+        if not want_to_find_digit and symbol in ok_symbols:
+            filtered_list.append(symbol)
+            want_to_find_digit = not want_to_find_digit
+    if len(filtered_list) > 0 and not filtered_list[-1].isdigit():
+        filtered_list = filtered_list[:-1]
+    if len(filtered_list) == 0:
+        update.message.reply_text(f'Cannot understand your query. Can calc somthing like 1+2/7*789')    
+        return
+    
+    update.message.reply_text(f'Transformed your query in {" ".join(filtered_list)}')    
+    multiplication_counter = 0
+    sum_counter = 0
+    for val in filtered_list:
+        if val in ['/', '*']:
+            multiplication_counter += 1
+        if val in ['+', '-']:
+            sum_counter += 1
+    try:
+        for _ in range(multiplication_counter):
+            for i, val in enumerate(filtered_list):
+                if val  == '/':
+                    filtered_list[i] = float(filtered_list[i-1]) / float(filtered_list[i+1])
+                    del filtered_list[i+1]
+                    del filtered_list[i-1]
+                if val  == '*':
+                    filtered_list[i] = float(filtered_list[i-1]) * float(filtered_list[i+1])   
+                    del filtered_list[i+1]
+                    del filtered_list[i-1]    
+
+        for _ in range(sum_counter):
+            for i, val in enumerate(filtered_list):
+                if val  == '+':
+                    filtered_list[i] = float(filtered_list[i-1]) + float(filtered_list[i+1])
+                    del filtered_list[i+1]
+                    del filtered_list[i-1]  
+                if val  == '-':
+                    filtered_list[i] = float(filtered_list[i-1]) - float(filtered_list[i+1])  
+                    del filtered_list[i+1]
+                    del filtered_list[i-1]        
+    except ZeroDivisionError as e:
+        update.message.reply_text('Cannot divide by zero')    
+        return
+    update.message.reply_text(f'result is {filtered_list[0]}')  
+    
+    
 def main():
     mybot = Updater(token, request_kwargs=PROXY)
     dp = mybot.dispatcher
@@ -140,6 +194,7 @@ def main():
     dp.add_handler(CommandHandler("init_city_game", init_city_game))
     dp.add_handler(CommandHandler("remind_city_game", remind_city_game))
     dp.add_handler(CommandHandler("m", m))
+    dp.add_handler(CommandHandler("calc", calc))                              
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     mybot.start_polling()
