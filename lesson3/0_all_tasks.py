@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 from geopy import distance
 
-df = pd.read_csv('data-398-2019-09-18.csv',sep=';', comment='#')
+df = pd.read_csv('stops.csv',sep=';', comment='#')
 print(f"number of bus stops {len(df)}")
 street_stat = df.groupby('Street')['global_id'].agg('nunique')
 print(f'The most popular street is {street_stat.idxmax()}')
@@ -28,7 +28,7 @@ else:
     print('there are no stations')
     
 
-stops = pd.read_csv('data-398-2019-09-18.csv',sep=';', comment='#')
+stops = pd.read_csv('stops.csv',sep=';', comment='#')
 metro = pd.read_csv('metro.csv', sep = ';')
 stops_list = stops[[ 'Longitude_WGS84','Latitude_WGS84']].values
 
